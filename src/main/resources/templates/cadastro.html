@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #333333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            width: 320px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: -60px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #ff6384, #333333);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #333333;
+        }
+
+        p {
+            font-size: 14px;
+            color: #888888;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 12px;
+            color: #888888;
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #cccccc;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #555555;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Criar uma nova conta</h1>
+    <p>Já tem uma conta? <a href="/login">clique aqui!</a></p>
+    <form>
+        <label>Nome Completo</label>
+        <input type="text" id="name" placeholder="Jiara Martins">
+
+        <label>Email</label>
+        <input type="email" id="email" placeholder="email@email.com">
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="******">
+
+        <label>Data de Nascimento</label>
+        <input type="date" id="date">
+
+        <label>Endereço</label>
+        <input type="text" id="address" placeholder="Rua fulano de tal, 89">
+
+        <button type="submit" class="button">Criar conta</button>
+    </form>
+</div>
+</body>
+</html>
