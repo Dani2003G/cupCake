@@ -12,4 +12,9 @@ public class CupCakeController {
         return new ModelAndView("index");
     }
 
+    @GetMapping("/cadastro")
+    public ModelAndView cadastro() {
+        return new ModelAndView("cadastro");
+    }
+
 }
