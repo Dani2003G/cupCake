@@ -22,4 +22,9 @@ public class CupCakeController {
         return new ModelAndView("buscaReceita");
     }
 
+    @GetMapping("/buscaLoja")
+    public ModelAndView buscaLoja() {
+        return new ModelAndView("buscaLoja");
+    }
+
 }
