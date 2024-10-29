@@ -17,4 +17,9 @@ public class CupCakeController {
         return new ModelAndView("cadastro");
     }
 
+    @GetMapping("/buscaReceita")
+    public ModelAndView buscaReceita() {
+        return new ModelAndView("buscaReceita");
+    }
+
 }
