@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .botaoVoltar {
+            font-size: 20px;
+            text-decoration: none;
+            color: black;
+            margin-right: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: black;
+        }
+
+        .barraNavegacao {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .barraNavegacao input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .search-button {
+            padding: 10px;
+            background-color: #ccc;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .filtro {
+            margin-bottom: 20px;
+        }
+
+        .filtro label {
+            font-size: 14px;
+            color: gray;
+        }
+
+        .filtro select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .listaReceita {
+            display: flex;
+        }
+
+        .receitas {
+            display: flex;
+            width: 25%;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .receitas img {
+            width: 60px;
+            height: 60px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .receitas h2 {
+            font-size: 16px;
+            color: black;
+            margin-bottom: 5px;
+        }
+
+        .receitas p {
+            font-size: 14px;
+            color: gray;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <a href="#" class="botaoVoltar">←</a>
+        <h1>Buscar receitas</h1>
+    </header>
+
+    <div class="barraNavegacao">
+        <input type="text" placeholder="Receita de Cupcake">
+        <button class="search-button">🔍</button>
+    </div>
+
+    <div class="filtro">
+        <label>FILTRAR POR</label>
+        <select>
+            <option>Selecionar</option>
+        </select>
+    </div>
+
+    <div class="listaReceita">
+        <div class="receitas">
+            <!--            <img src="image1.jpg">-->
+            <div>
+                <h2>Cupcakes de chocolate</h2>
+                <p>⭐⭐⭐⭐⭐ (27 avaliações)</p>
+            </div>
+        </div>
+        <div class="receitas">
+            <!--            <img src="image1.jpg">-->
+            <div>
+                <h2>Cupcakes de simples</h2>
+                <p>⭐⭐⭐ (3 avaliações)</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
