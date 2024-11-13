@@ -30,4 +30,15 @@ public class CupCakeDTO {
         dto.setUrlImagem(cupCake.getUrlImagem());
         return dto;
     }
+
+    public CupCake toEntity() {
+        CupCake cupCake = new CupCake();
+        cupCake.setNome(this.nome);
+        cupCake.setDescricao(this.descricao);
+        cupCake.setTempoPreparo(this.tempoPreparo);
+        cupCake.setIgredientes(this.igredientes);
+        cupCake.setModoPreparo(this.modoPreparo);
+        cupCake.setUrlImagem(this.urlImagem);
+        return cupCake;
+    }
 }
