@@ -18,4 +18,8 @@ public class CupCakeService {
         List<CupCake> cupCakes = cupCakeRepository.findAll();
         return cupCakes.stream().map(new CupCakeDTO()::toDTO).toList();
     }
+
+    public void salvar(CupCakeDTO dto) {
+        cupCakeRepository.save(dto.toEntity());
+    }
 }
