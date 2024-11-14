@@ -1,7 +1,6 @@
 package br.com.projeto.cupCake.controller;
 
 import br.com.projeto.cupCake.dto.CupCakeDTO;
-import br.com.projeto.cupCake.model.CupCake;
 import br.com.projeto.cupCake.service.CupCakeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ public class ReceitaController {
 
     @GetMapping
     public ModelAndView receita() {
-        return new ModelAndView("receita");
+        return new ModelAndView("/usuario/receita");
     }
 
     @PostMapping("/novo")
