@@ -14,8 +14,8 @@ public class HistoricoPedidoService {
 
     private final HistoricoPedidoRepository historicoPedidoRepository;
 
-    public List<HistoricoPedidoDTO> buscarTudo() {
-        List<HistoricoPedido> historicoPedidos = historicoPedidoRepository.findAll();
+    public List<HistoricoPedidoDTO> buscarTudoPorUsuario(String email) {
+        List<HistoricoPedido> historicoPedidos = historicoPedidoRepository.buscarPorUsuario(email);
         return historicoPedidos.stream().map(new HistoricoPedidoDTO()::toDTO).toList();
     }
 }
