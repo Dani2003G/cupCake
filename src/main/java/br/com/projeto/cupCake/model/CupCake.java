@@ -1,9 +1,6 @@
 package br.com.projeto.cupCake.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,4 +24,7 @@ public class CupCake {
     private String modoPreparo;
 
     private String urlImagem;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Usuario usuario;
 }
