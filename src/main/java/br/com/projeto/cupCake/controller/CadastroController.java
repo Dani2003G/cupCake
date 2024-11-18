@@ -22,6 +22,6 @@ public class CadastroController {
     @PostMapping("/cadastrar")
     public ModelAndView cadastrar(UsuarioDTO dto) {
         usuarioService.salvar(dto);
-        return new ModelAndView("cadastro");
+        return new ModelAndView("redirect:/login");
     }
 }
