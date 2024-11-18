@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
@@ -19,7 +21,10 @@ public class AdminController {
 
     @GetMapping
     public ModelAndView admin() {
-        return new ModelAndView("admin/home");
+        ModelAndView mv = new ModelAndView("admin/home");
+        List<CupCakeDTO> cupCakes = cupCakeService.buscarTodosProdutos();
+        mv.addObject("cupCakes", cupCakes);
+        return mv;
     }
 
     @GetMapping("/adicionarProduto")

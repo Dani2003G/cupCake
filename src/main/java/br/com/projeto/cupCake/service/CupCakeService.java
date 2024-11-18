@@ -40,4 +40,9 @@ public class CupCakeService {
         cupCake.setTipo(Tipo.PRODUTO);
         cupCakeRepository.save(cupCake);
     }
+
+    public List<CupCakeDTO> buscarTodosProdutos() {
+        List<CupCake> cupCakes = cupCakeRepository.buscarTodosProdutos(Tipo.PRODUTO);
+        return cupCakes.stream().map(new CupCakeDTO()::toDTO).toList();
+    }
 }
