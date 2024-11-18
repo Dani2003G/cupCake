@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
@@ -25,6 +27,8 @@ public class CupCake {
     private String modoPreparo;
 
     private String urlImagem;
+
+    private BigDecimal preco;
 
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
