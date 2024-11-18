@@ -24,6 +24,8 @@ public class CupCakeDTO {
 
     private BigDecimal preco;
 
+    private String tipo;
+
     public CupCakeDTO toDTO(CupCake cupCake) {
         CupCakeDTO dto = new CupCakeDTO();
         dto.setNome(cupCake.getNome());
@@ -33,6 +35,7 @@ public class CupCakeDTO {
         dto.setModoPreparo(cupCake.getModoPreparo());
         dto.setUrlImagem(cupCake.getUrlImagem());
         dto.setPreco(cupCake.getPreco());
+        dto.setTipo(cupCake.getTipo().getDescricao());
         return dto;
     }
 
