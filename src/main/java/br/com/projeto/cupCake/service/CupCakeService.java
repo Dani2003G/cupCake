@@ -27,4 +27,9 @@ public class CupCakeService {
         cupCake.setUsuario(usuarioRepositoy.findByEmail(email));
         cupCakeRepository.save(cupCake);
     }
+
+    public List<CupCakeDTO> buscaPorUsuario(String email) {
+        List<CupCake> cupCakes = cupCakeRepository.buscarPorUsuario(email);
+        return cupCakes.stream().map(new CupCakeDTO()::toDTO).toList();
+    }
 }
