@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,4 +36,7 @@ public class CupCake {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "cupCakes")
+    private List<Pedidos> pedidos;
 }
