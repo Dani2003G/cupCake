@@ -13,7 +13,4 @@ public class Favorito {
 
     @EmbeddedId
     private FavoritoId id;
-
-    @OneToMany(mappedBy = "favorito")
-    private List<CupCake> cupCakes;
 }
