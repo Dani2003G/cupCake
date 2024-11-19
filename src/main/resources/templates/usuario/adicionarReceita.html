@@ -5,6 +5,7 @@
 <div th:replace="~{base :: logo}"></div>
 
 <div class="container">
+    <div th:replace="~{base :: titulo('Adicionar Receita')}"></div>
     <div class="card mt-5">
         <form th:object="${cupCakeDTO}" th:action="@{/receita/novo}" class="card-body" method="post">
             <div class="form-group">
