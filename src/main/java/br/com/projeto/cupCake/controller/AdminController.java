@@ -35,7 +35,7 @@ public class AdminController {
     @PostMapping("/adicionarProduto")
     public ModelAndView adicionarProdutos(CupCakeDTO dto) {
         cupCakeService.adiconarProduto(dto);
-        return new ModelAndView("redirect:/admin/home");
+        return new ModelAndView("redirect:/admin");
     }
 
 }
