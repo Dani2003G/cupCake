@@ -25,7 +25,7 @@
             <p th:text="${cupCake.modoPreparo}"></p>
 
             <a th:if="${!isFavorito}" th:href="@{/receita/favoritar/{id}(id=${cupCake.id})}" class="btn btn-danger">Favoritar</a>
-            <a th:if="${isFavorito}" th:href="@{/receita/favoritar/{id}(id=${cupCake.id})}" class="btn btn-danger">Desfavoritar</a>
+            <a th:if="${isFavorito}" th:href="@{/receita/desfavoritar/{id}(id=${cupCake.id})}" class="btn btn-danger">Desfavoritar</a>
         </card>
     </div>
 </div>
