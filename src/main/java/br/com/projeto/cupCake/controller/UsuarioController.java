@@ -87,4 +87,10 @@ public class UsuarioController {
         carrinhoService.adicionarCarrinho(id, principal.getName());
         return new ModelAndView("redirect:/receita/informacoes/" + id);
     }
+
+    @GetMapping("/removerCarrinho/{id}")
+    public ModelAndView removerCarrinho(@PathVariable Long id, Principal principal) {
+        carrinhoService.removerCarrinho(id, principal.getName());
+        return new ModelAndView("redirect:/receita/informacoes/" + id);
+    }
 }

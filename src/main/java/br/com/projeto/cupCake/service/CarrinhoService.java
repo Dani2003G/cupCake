@@ -44,4 +44,13 @@ public class CarrinhoService {
         }
         return true;
     }
+
+    public void removerCarrinho(Long id, String email) {
+        Usuario usuario = usuarioRepositoy.findByEmail(email);
+        CupCake cupCake = cupCakeRepository.findById(id).get();
+        List<Carrinho> listaCarrinho = carrinhoRepository.buscarPorCupCakeEUsuario(usuario.getId(), cupCake.getId());
+        if(!listaCarrinho.isEmpty()){
+            carrinhoRepository.deleteAll(listaCarrinho);
+        }
+    }
 }
