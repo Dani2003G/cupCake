@@ -29,6 +29,8 @@ public class UsuarioController {
 
     private final FavoritoService favoritoService;
 
+    private final CarrinhoService carrinhoService;
+
     @GetMapping
     public ModelAndView perfil() {
         return new ModelAndView("/usuario/perfil");
@@ -74,9 +76,15 @@ public class UsuarioController {
         return mv;
     }
 
-    @GetMapping("receita/desfavoritar/{id}")
+    @GetMapping("/receita/desfavoritar/{id}")
     public ModelAndView desfavoritar(@PathVariable Long id, Principal principal) {
         favoritoService.desfavoritar(id, principal.getName());
         return new ModelAndView("/usuario/favoritos");
+    }
+
+    @GetMapping("/adicionarCarrinho/{id}")
+    public ModelAndView adicionarCarrinho(@PathVariable Long id, Principal principal) {
+        carrinhoService.adicionarCarrinho(id, principal.getName());
+        return new ModelAndView("redirect:/receita/informacoes/" + id);
     }
 }
