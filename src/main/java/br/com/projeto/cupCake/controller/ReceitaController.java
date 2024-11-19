@@ -33,16 +33,15 @@ public class ReceitaController {
     public ModelAndView informacoes(@PathVariable Long id, CupCakeDTO dto, Principal principal) {
         CupCakeDTO cupCakeDTO = cupCakeService.buscarPorId(id);
         Boolean isFavorito = favoritoService.isFavorito(id, principal.getName());
+        ModelAndView mv;
         if (cupCakeDTO.getTipo().equals("Receita")) {
-            ModelAndView mv = new ModelAndView("informacoesReceita");
-            mv.addObject("cupCake", cupCakeDTO);
-            mv.addObject("isFavorito", isFavorito);
-            return mv;
+            mv = new ModelAndView("informacoesReceita");
         } else {
-            ModelAndView mv = new ModelAndView("informacoesProduto");
-            mv.addObject("cupCake", cupCakeDTO);
-            return mv;
+            mv = new ModelAndView("informacoesProduto");
         }
+        mv.addObject("cupCake", cupCakeDTO);
+        mv.addObject("isFavorito", isFavorito);
+        return mv;
     }
 
     @GetMapping("/favoritar/{id}")
