@@ -1,10 +1,11 @@
 package br.com.projeto.cupCake.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -12,9 +13,11 @@ import java.util.List;
 public class Carrinho {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "carrinho")
-    private List<CupCake> cupCake;
+    private Long idCupCake;
+
+    private Long idUsuario;
 
 }
