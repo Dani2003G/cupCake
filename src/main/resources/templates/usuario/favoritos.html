@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{base :: head}"></head>
+<body>
+<div th:replace="~{base :: logo}"></div>
+
+<div class="container">
+  <div th:replace="~{base :: titulo('Favoritos')}"></div>
+  <div class="row row-cols-1 row-cols-md-3 mt-5" >
+    <div class="col mb-4" th:each="cupCake : ${cupCakes}">
+      <div class="card">
+        <img th:src="${cupCake.urlImagem}" class="card-img-top" height="200" width="200">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${cupCake.nome}"></h5>
+          <a th:href="@{/receita/informacoes/{id}(id=${cupCake.id})}" class="card-text" th:text="${cupCake.descricao}"></a>
+          <p class="card-text" th:text="${cupCake.tipo}"></p>
+          <a th:href="@{/usuario/receita/desfavoritar/{id}(id=${cupCake.id})}" class="btn btn-danger">Desfavoritar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
