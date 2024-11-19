@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{base :: head}"></head>
+<body>
+<div th:replace="~{base :: logo}"></div>
+
+<div class="container">
+    <div class="card mt-5">
+        <card class="card-body">
+            <img th:src="${cupCake.urlImagem}" height="200" width="200"/>
+
+            <h5>Nome</h5>
+            <p th:text="${cupCake.nome}"></p>
+
+            <h5>Descrição</h5>
+            <p th:text="${cupCake.descricao}"></p>
+
+            <h5>Preço</h5>
+            <p th:text="${cupCake.preco}"></p>
+
+            <a th:if="${!isFavorito}" th:href="@{/receita/favoritar/{id}(id=${cupCake.id})}" class="btn btn-success">Favoritar</a>
+            <a th:if="${isFavorito}" th:href="@{/receita/desfavoritar/{id}(id=${cupCake.id})}" class="btn btn-danger">Desfavoritar</a>
+            <a th:if="${!isCarrinho}" th:href="@{/usuario/adicionarCarrinho/{id}(id=${cupCake.id})}" class="btn btn-success">Adicionar ao Carrinho</a>
+            <a th:if="${isCarrinho}" th:href="@{/usuario/removerCarrinho/{id}(id=${cupCake.id})}" class="btn btn-danger">Remover do Carrinho</a>
+        </card>
+    </div>
+</div>
+
+</body>
+</html>
