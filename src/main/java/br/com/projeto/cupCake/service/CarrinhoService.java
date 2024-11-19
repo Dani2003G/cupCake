@@ -10,9 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -28,31 +26,22 @@ public class CarrinhoService {
     public void adicionarCarrinho(Long id, String email) {
         CupCake cupCake = cupCakeRepository.findById(id).get();
         Usuario usuario = usuarioRepositoy.findByEmail(email);
-        Optional<Carrinho> carrinhoOptional = carrinhoRepository.findById(usuario.getId());
-        if (carrinhoOptional.isPresent()) {
-            Carrinho carrinho = carrinhoOptional.get();
-            if (Objects.isNull(carrinho.getCupCake())) {
-                carrinho.setCupCake(new ArrayList<>());
-                carrinho.getCupCake().add(cupCake);
-            } else {
-                Boolean tem = false;
-                for (CupCake cake : carrinho.getCupCake()) {
-                    if (cake.getId().equals(cupCake.getId())) {
-                        tem = true;
-                        break;
-                    }
-                }
-                if (!tem) {
-                    carrinho.getCupCake().add(cupCake);
-                }
-            }
-            carrinhoRepository.save(carrinho);
-        } else {
+        List<Carrinho> listaCarrinho = carrinhoRepository.buscarPorCupCakeEUsuario(usuario.getId(), cupCake.getId());
+        if (listaCarrinho.isEmpty()) {
             Carrinho carrinho = new Carrinho();
-            carrinho.setId(id);
-            carrinho.setCupCake(new ArrayList<>());
-            carrinho.getCupCake().add(cupCake);
+            carrinho.setIdCupCake(cupCake.getId());
+            carrinho.setIdUsuario(usuario.getId());
             carrinhoRepository.save(carrinho);
         }
+    }
+
+    public Boolean isCarrinho(String email, Long id) {
+        Usuario usuario = usuarioRepositoy.findByEmail(email);
+        CupCake cupCake = cupCakeRepository.findById(id).get();
+        List<Carrinho> listaCarrinho = carrinhoRepository.buscarPorCupCakeEUsuario(usuario.getId(), cupCake.getId());
+        if (listaCarrinho.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 }
