@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 @Setter
 public class CupCakeDTO {
 
+    private Long id;
+
     private String nome;
 
     private String descricao;
@@ -28,6 +30,7 @@ public class CupCakeDTO {
 
     public CupCakeDTO toDTO(CupCake cupCake) {
         CupCakeDTO dto = new CupCakeDTO();
+        dto.setId(cupCake.getId());
         dto.setNome(cupCake.getNome());
         dto.setDescricao(cupCake.getDescricao());
         dto.setTempoPreparo(cupCake.getTempoPreparo());
