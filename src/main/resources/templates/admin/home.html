@@ -9,22 +9,25 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Produtos</a>
+                    <a class="nav-link" href="/admin">Produtos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pedidos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/adicionarProduto">Adicionar Produtos</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div class="row row-cols-1 row-cols-md-3 mt-5" >
+    <div class="row row-cols-1 row-cols-md-3 mt-5">
         <div class="col mb-4" th:each="cupCake : ${cupCakes}">
             <div class="card">
                 <img th:src="${cupCake.urlImagem}" class="card-img-top" height="200" width="200">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${cupCake.nome}"></h5>
-                    <a href="/verReceita" class="card-text" th:text="${cupCake.descricao}"></a>
+                    <a th:href="@{/receita/informacoes/{id}(id=${cupCake.id})}" class="card-text" th:text="${cupCake.descricao}"></a>
                     <p>Preço: <span th:text="${cupCake.preco}"></span></p>
                 </div>
             </div>
