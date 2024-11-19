@@ -12,7 +12,7 @@
                 <img th:src="${cupCake.urlImagem}" class="card-img-top" height="200" width="200">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${cupCake.nome}"></h5>
-                    <a href="/verReceita" class="card-text" th:text="${cupCake.descricao}"></a>
+                    <a th:href="@{/receita/informacoes/{id}(id=${cupCake.id})}" class="card-text" th:text="${cupCake.descricao}"></a>
                     <p class="card-text" th:text="${cupCake.tipo}"></p>
                 </div>
             </div>
