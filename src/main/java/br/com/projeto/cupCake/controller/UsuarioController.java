@@ -1,12 +1,16 @@
 package br.com.projeto.cupCake.controller;
 
 import br.com.projeto.cupCake.dto.CupCakeDTO;
-import br.com.projeto.cupCake.service.*;
+import br.com.projeto.cupCake.service.CupCakeService;
+import br.com.projeto.cupCake.service.FavoritoService;
+import br.com.projeto.cupCake.service.UsuarioService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,6 +25,8 @@ public class UsuarioController {
     private final CupCakeService cupCakeService;
 
     private final FavoritoService favoritoService;
+
+    private final UsuarioService usuarioService;
 
     @GetMapping
     public ModelAndView perfil() {
@@ -52,5 +58,13 @@ public class UsuarioController {
     public ModelAndView desfavoritar(@PathVariable Long id, Principal principal) {
         favoritoService.desfavoritar(id, principal.getName());
         return new ModelAndView("/usuario/favoritos");
+    }
+
+    @GetMapping("/deletarConta")
+    public ModelAndView deletarConta(HttpServletRequest request, HttpServletResponse response, Principal principal) {
+        usuarioService.deletarUsuario(principal.getName());
+        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+        logoutHandler.logout(request, response, null);
+        return new ModelAndView("redirect:/home");
     }
 }
