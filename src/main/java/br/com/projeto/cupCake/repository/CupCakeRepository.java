@@ -13,4 +13,10 @@ public interface CupCakeRepository extends JpaRepository<CupCake, Long> {
 
     @Query("SELECT cc FROM CupCake cc JOIN cc.usuario u WHERE  u.email = :email")
     List<CupCake> buscarPorUsuario(@Param("email") String email);
+
+    @Query("SELECT cc FROM CupCake cc WHERE cc.aprovado = FALSE")
+    List<CupCake> buscarReceitasNaoAprovadas();
+
+    @Query("SELECT cc FROM CupCake cc WHERE cc.aprovado = TRUE")
+    List<CupCake> buscarTodasAprovadas();
 }
