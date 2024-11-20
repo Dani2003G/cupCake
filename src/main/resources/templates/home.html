@@ -6,6 +6,7 @@
 <div th:replace="~{base :: logo}"></div>
 
 <div class="container">
+    <div th:replace="~{base :: titulo('Receitas')}"></div>
     <div class="row row-cols-1 row-cols-md-3 mt-5" >
         <div class="col mb-4" th:each="cupCake : ${cupCakes}">
             <div class="card">
