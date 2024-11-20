@@ -36,7 +36,4 @@ public class CupCake {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "cupCakes")
-    private List<Pedidos> pedidos;
 }

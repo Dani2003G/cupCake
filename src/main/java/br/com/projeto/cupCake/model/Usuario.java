@@ -42,9 +42,6 @@ public class Usuario {
     private LocalDateTime dataCadastro;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
-    private List<HistoricoPedido> historicoPedidos;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<CupCake> cupCakes;
 
 }
