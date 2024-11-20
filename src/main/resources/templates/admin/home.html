@@ -5,16 +5,7 @@
 <div th:replace="~{base :: logo}"></div>
 
 <div class="container">
-    <nav class="navbar navbar-expand navbar-dark bg-dark mt-3">
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/admin">Produtos</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
+    <div th:replace="~{base :: titulo('Receitas')}"></div>
     <div class="row row-cols-1 row-cols-md-3 mt-5">
         <div class="col mb-4" th:each="cupCake : ${cupCakes}">
             <div class="card">
