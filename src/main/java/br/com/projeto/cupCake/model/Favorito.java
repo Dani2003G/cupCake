@@ -1,10 +1,9 @@
 package br.com.projeto.cupCake.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Entity
 @Getter
