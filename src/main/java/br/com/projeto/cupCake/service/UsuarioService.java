@@ -55,4 +55,9 @@ public class UsuarioService implements UserDetailsService{
         usuario.setDataCadastro(LocalDateTime.now());
         usuarioRepositoy.save(usuario);
     }
+
+    public void deletarUsuario(String email) {
+        Usuario usuario = usuarioRepositoy.findByEmail(email);
+        usuarioRepositoy.delete(usuario);
+    }
 }
