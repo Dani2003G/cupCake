@@ -22,15 +22,7 @@ public class AdminController {
     @GetMapping
     public ModelAndView admin() {
         ModelAndView mv = new ModelAndView("admin/home");
-        List<CupCakeDTO> cupCakes = cupCakeService.buscarTodosProdutos();
-        mv.addObject("cupCakes", cupCakes);
         return mv;
-    }
-
-    @PostMapping("/adicionarProduto")
-    public ModelAndView adicionarProdutos(CupCakeDTO dto) {
-        cupCakeService.adiconarProduto(dto);
-        return new ModelAndView("redirect:/admin");
     }
 
 }
