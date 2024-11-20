@@ -1,12 +1,10 @@
 package br.com.projeto.cupCake.model;
 
-import br.com.projeto.cupCake.enums.Tipo;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Getter
@@ -30,9 +28,6 @@ public class CupCake {
     private String urlImagem;
 
     private BigDecimal preco;
-
-    @Enumerated(EnumType.STRING)
-    private Tipo tipo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
