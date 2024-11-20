@@ -56,4 +56,8 @@ public class CupCakeService {
         cupCakes = cupCakes.stream().filter(cupCake -> idCupCakes.contains(cupCake.getId())).toList();
         return cupCakes.stream().map(new CupCakeDTO()::toDTO).toList();
     }
+
+    public void deletar(Long id) {
+        cupCakeRepository.deleteById(id);
+    }
 }
