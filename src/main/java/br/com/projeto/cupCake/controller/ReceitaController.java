@@ -1,8 +1,6 @@
 package br.com.projeto.cupCake.controller;
 
 import br.com.projeto.cupCake.dto.CupCakeDTO;
-import br.com.projeto.cupCake.model.Favorito;
-import br.com.projeto.cupCake.service.CarrinhoService;
 import br.com.projeto.cupCake.service.CupCakeService;
 import br.com.projeto.cupCake.service.FavoritoService;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +22,6 @@ public class ReceitaController {
 
     private final FavoritoService favoritoService;
 
-    private final CarrinhoService carrinhoService;
-
     @PostMapping("/novo")
     public ModelAndView novaReceita(CupCakeDTO dto, Principal principal) {
         cupCakeService.salvar(dto, principal.getName());
@@ -36,14 +32,7 @@ public class ReceitaController {
     public ModelAndView informacoes(@PathVariable Long id, CupCakeDTO dto, Principal principal) {
         CupCakeDTO cupCakeDTO = cupCakeService.buscarPorId(id);
         Boolean isFavorito = favoritoService.isFavorito(id, principal.getName());
-        ModelAndView mv;
-        if (cupCakeDTO.getTipo().equals("Receita")) {
-            mv = new ModelAndView("informacoesReceita");
-        } else {
-            mv = new ModelAndView("informacoesProduto");
-            Boolean isCarrinho = carrinhoService.isCarrinho(principal.getName(), id);
-            mv.addObject("isCarrinho", isCarrinho);
-        }
+        ModelAndView mv = new ModelAndView("informacoesReceita");
         mv.addObject("cupCake", cupCakeDTO);
         mv.addObject("isFavorito", isFavorito);
         return mv;

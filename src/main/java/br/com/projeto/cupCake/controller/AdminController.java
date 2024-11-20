@@ -27,11 +27,6 @@ public class AdminController {
         return mv;
     }
 
-    @GetMapping("/adicionarProduto")
-    public ModelAndView adicionarProduto() {
-        return new ModelAndView("admin/adicionarProduto");
-    }
-
     @PostMapping("/adicionarProduto")
     public ModelAndView adicionarProdutos(CupCakeDTO dto) {
         cupCakeService.adiconarProduto(dto);
