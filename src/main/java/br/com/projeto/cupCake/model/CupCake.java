@@ -27,7 +27,7 @@ public class CupCake {
 
     private String urlImagem;
 
-    private BigDecimal preco;
+    private Boolean aprovado;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
