@@ -32,11 +32,11 @@ public class UsuarioController {
         return new ModelAndView("/usuario/adicionarReceita");
     }
 
-    @GetMapping("/receitas")
-    public ModelAndView receitas(Principal principal) {
-        ModelAndView mv = new ModelAndView("/usuario/receitas");
+    @GetMapping("/minhasReceitas")
+    public ModelAndView minhasReceitas(Principal principal) {
+        ModelAndView mv = new ModelAndView("/usuario/minhasReceitas");
         List<CupCakeDTO> cupCakeDTOS = cupCakeService.buscaPorUsuario(principal.getName());
-        mv.addObject("receitas", cupCakeDTOS);
+        mv.addObject("cupCakes", cupCakeDTOS);
         return mv;
     }
 
