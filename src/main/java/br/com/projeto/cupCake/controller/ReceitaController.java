@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,7 +32,10 @@ public class ReceitaController {
     @GetMapping("/informacoes/{id}")
     public ModelAndView informacoes(@PathVariable Long id, CupCakeDTO dto, Principal principal) {
         CupCakeDTO cupCakeDTO = cupCakeService.buscarPorId(id);
-        Boolean isFavorito = favoritoService.isFavorito(id, principal.getName());
+        Boolean isFavorito = false;
+        if(Objects.nonNull(principal)) {
+            isFavorito = favoritoService.isFavorito(id, principal.getName());
+        }
         ModelAndView mv = new ModelAndView("informacoesReceita");
         mv.addObject("cupCake", cupCakeDTO);
         mv.addObject("isFavorito", isFavorito);
@@ -48,5 +52,11 @@ public class ReceitaController {
     public ModelAndView desfavoritar(@PathVariable Long id, Principal principal) {
         favoritoService.desfavoritar(id, principal.getName());
         return new ModelAndView("redirect:/receita/informacoes/" + id);
+    }
+
+    @GetMapping("/deletarReceita/{id}")
+    public ModelAndView deletarReceita(@PathVariable Long id) {
+        cupCakeService.deletar(id);
+        return new ModelAndView("redirect:/usuario/minhasReceitas");
     }
 }
