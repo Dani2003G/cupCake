@@ -20,7 +20,7 @@ public class HomeController {
     @GetMapping
     public ModelAndView home() {
         ModelAndView mv = new ModelAndView("home");
-        List<CupCakeDTO> cupCakes = cupCakeService.buscarTudo();
+        List<CupCakeDTO> cupCakes = cupCakeService.buscarTodasAprovadas();
         mv.addObject("cupCakes", cupCakes);
         return mv;
     }
