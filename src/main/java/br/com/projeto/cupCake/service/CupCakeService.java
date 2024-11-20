@@ -24,14 +24,10 @@ public class CupCakeService {
 
     private final FavoritoRepository favoritoRepository;
 
-    public List<CupCakeDTO> buscarTudo() {
-        List<CupCake> cupCakes = cupCakeRepository.findAll();
-        return cupCakes.stream().map(new CupCakeDTO()::toDTO).toList();
-    }
-
     public void salvar(CupCakeDTO dto, String email) {
         CupCake cupCake = dto.toEntity();
         cupCake.setUsuario(usuarioRepositoy.findByEmail(email));
+        cupCake.setAprovado(Boolean.FALSE);
         cupCakeRepository.save(cupCake);
     }
 
@@ -59,5 +55,21 @@ public class CupCakeService {
 
     public void deletar(Long id) {
         cupCakeRepository.deleteById(id);
+    }
+
+    public List<CupCakeDTO> buscarReceitasNaoAprovadas() {
+        List<CupCake> cupCakes = cupCakeRepository.buscarReceitasNaoAprovadas();
+        return cupCakes.stream().map(new CupCakeDTO()::toDTO).toList();
+    }
+
+    public void aprovar(Long id) {
+        CupCake cupCake = cupCakeRepository.findById(id).get();
+        cupCake.setAprovado(Boolean.TRUE);
+        cupCakeRepository.save(cupCake);
+    }
+
+    public List<CupCakeDTO> buscarTodasAprovadas() {
+        List<CupCake> cupCakes = cupCakeRepository.buscarTodasAprovadas();
+        return cupCakes.stream().map(new CupCakeDTO()::toDTO).toList();
     }
 }
