@@ -17,4 +17,6 @@ public interface UsuarioRepositoy extends JpaRepository<Usuario, Long> {
 
     @Query("SELECT us FROM Usuario us WHERE us.role = 'ADMIN'")
     List<Usuario> buscarUsuariosAdministradores();
+
+    Usuario findByCpf(String cpf);
 }
