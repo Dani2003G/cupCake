@@ -34,6 +34,10 @@ public class UsuarioDTO {
 
     private String dataCadastro;
 
+    private String novaSenha;
+
+    private String confirmarSenha;
+
     public UsuarioDTO toDTO(Usuario entidade) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(entidade.getId());
