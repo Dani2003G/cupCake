@@ -32,6 +32,27 @@
     </div>
 </div>
 
+<div th:fragment="navAdmin(valor)">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li th:class="${valor} == 1 ? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" href="/admin">Aprovar</a>
+                </li>
+                <li th:class="${valor} == 2 ? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" href="/admin/receitas">Receitas</a>
+                </li>
+                <li th:class="${valor} == 3 ? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" href="/admin/usuarios">Usuarios</a>
+                </li>
+                <li th:class="${valor} == 4 ? 'nav-item active' : 'nav-item'">
+                    <a class="nav-link" href="/admin/administradores">Administradores</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
 <div th:fragment="titulo(valor)" class="jumbotron mb-3 mt-3">
     <h1 class="display-4" th:text="${valor}"></h1>
 </div>
