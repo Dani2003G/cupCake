@@ -1,5 +1,6 @@
 package br.com.projeto.cupCake.controller;
 
+import br.com.projeto.cupCake.dto.AlterarSenhaDTO;
 import br.com.projeto.cupCake.dto.CupCakeDTO;
 import br.com.projeto.cupCake.dto.UsuarioDTO;
 import br.com.projeto.cupCake.service.CupCakeService;
@@ -7,9 +8,11 @@ import br.com.projeto.cupCake.service.FavoritoService;
 import br.com.projeto.cupCake.service.UsuarioService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,13 +88,16 @@ public class UsuarioController {
     }
 
     @GetMapping("/alterarSenha")
-    public ModelAndView alterarSenha() {
+    public ModelAndView alterarSenha(AlterarSenhaDTO dto) {
         return new ModelAndView("/usuario/alterarSenha");
     }
 
     @PostMapping("/alterarSenha")
-    public ModelAndView alterarSenha(UsuarioDTO dto, Principal principal) {
-        usuarioService.alterarSenha(dto, principal.getName());
+    public ModelAndView alterarSenha(@Valid AlterarSenhaDTO dto, BindingResult result, Principal principal) {
+        usuarioService.alterarSenha(dto, principal.getName(), result);
+        if(result.hasErrors()) {
+            return new ModelAndView("/usuario/alterarSenha");
+        }
         return new ModelAndView("redirect:/usuario");
     }
 }
