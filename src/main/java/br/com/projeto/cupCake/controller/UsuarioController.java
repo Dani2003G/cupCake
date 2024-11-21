@@ -1,6 +1,7 @@
 package br.com.projeto.cupCake.controller;
 
 import br.com.projeto.cupCake.dto.CupCakeDTO;
+import br.com.projeto.cupCake.dto.UsuarioDTO;
 import br.com.projeto.cupCake.service.CupCakeService;
 import br.com.projeto.cupCake.service.FavoritoService;
 import br.com.projeto.cupCake.service.UsuarioService;
@@ -11,6 +12,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -66,5 +68,30 @@ public class UsuarioController {
         SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
         logoutHandler.logout(request, response, null);
         return new ModelAndView("redirect:/home");
+    }
+
+    @GetMapping("/alterarDados")
+    public ModelAndView alterarDados(Principal principal) {
+        ModelAndView mv = new ModelAndView("/usuario/alterarDados");
+        UsuarioDTO usuarioDTO = usuarioService.buscarPorEmail(principal.getName());
+        mv.addObject("usuarioDTO", usuarioDTO);
+        return mv;
+    }
+
+    @PostMapping("/alterarDados")
+    public ModelAndView alterarDados(UsuarioDTO dto, Principal principal) {
+        usuarioService.alterarDados(dto, principal.getName());
+        return new ModelAndView("redirect:/usuario/perfil");
+    }
+
+    @GetMapping("/alterarSenha")
+    public ModelAndView alterarSenha() {
+        return new ModelAndView("/usuario/alterarSenha");
+    }
+
+    @PostMapping("/alterarSenha")
+    public ModelAndView alterarSenha(UsuarioDTO dto, Principal principal) {
+        usuarioService.alterarSenha(dto, principal.getName());
+        return new ModelAndView("redirect:/usuario");
     }
 }

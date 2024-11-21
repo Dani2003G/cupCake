@@ -97,4 +97,45 @@ public class UsuarioService implements UserDetailsService{
         Usuario usuario = usuarioRepositoy.findById(id).get();
         return new UsuarioDTO().toDTO(usuario);
     }
+
+    public UsuarioDTO buscarPorEmail(String email) {
+        Usuario usuario = usuarioRepositoy.findByEmail(email);
+        return new UsuarioDTO().toDTO(usuario);
+    }
+
+    public void alterarDados(UsuarioDTO dto, String email) {
+        if(!dto.getEmail().equals(email)) {
+            if(Objects.nonNull(usuarioRepositoy.findByEmail(dto.getEmail()))) {
+                throw new ServiceException("E-mail já está sendo usado");
+            }
+        }
+        Usuario usuarioLogado = usuarioRepositoy.findByEmail(email);
+        if(!dto.getCpf().equals(usuarioLogado.getCpf())) {
+            if(Objects.nonNull(usuarioRepositoy.findByCpf(dto.getCpf()))) {
+                throw new ServiceException("CPF já está sendo usado");
+            }
+        }
+        usuarioLogado.setNome(dto.getNome());
+        usuarioLogado.setSobrenome(dto.getSobrenome());
+        usuarioLogado.setEmail(dto.getEmail());
+        usuarioLogado.setCpf(dto.getCpf());
+        usuarioLogado.setDataNascimento(LocalDate.parse(dto.getDataNascimento(), formatter));
+        usuarioLogado.setEstado(dto.getEstado());
+        usuarioLogado.setCidade(dto.getCidade());
+        usuarioLogado.setEndereco(dto.getEndereco());
+        usuarioRepositoy.save(usuarioLogado);
+    }
+
+    public void alterarSenha(UsuarioDTO dto, String email) {
+        Usuario usuarioLogado = usuarioRepositoy.findByEmail(email);
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        if(!encoder.matches(dto.getSenha(), usuarioLogado.getSenha())) {
+            throw new ServiceException("Senha atual incorreta");
+        }
+        if(!dto.getNovaSenha().equals(dto.getConfirmarSenha())) {
+            throw new ServiceException("As novas senhas não conferem");
+        }
+        usuarioLogado.setSenha(encoder.encode(dto.getNovaSenha()));
+        usuarioRepositoy.save(usuarioLogado);
+    }
 }
