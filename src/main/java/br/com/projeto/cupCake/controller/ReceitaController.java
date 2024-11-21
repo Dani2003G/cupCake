@@ -3,8 +3,11 @@ package br.com.projeto.cupCake.controller;
 import br.com.projeto.cupCake.dto.CupCakeDTO;
 import br.com.projeto.cupCake.service.CupCakeService;
 import br.com.projeto.cupCake.service.FavoritoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +27,18 @@ public class ReceitaController {
     private final FavoritoService favoritoService;
 
     @PostMapping("/novo")
-    public ModelAndView novaReceita(CupCakeDTO dto, Principal principal) {
+    public ModelAndView novaReceita(@Valid CupCakeDTO dto, BindingResult result , Principal principal) {
+        try {
+            Integer.parseInt(dto.getTempoPreparo());
+        } catch (Exception e) {
+            if(!result.hasFieldErrors("tempoPreparo")) {
+                result.addError(new FieldError("dto", "tempoPreparo", "Tempo preparo deve ser numérico"));
+            }
+        }
+
+        if(result.hasErrors()) {
+            return new ModelAndView("usuario/adicionarReceita");
+        }
         cupCakeService.salvar(dto, principal.getName());
         return new ModelAndView("redirect:/home");
     }
