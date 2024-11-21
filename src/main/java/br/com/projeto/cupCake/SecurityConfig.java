@@ -17,7 +17,7 @@ public class SecurityConfig {
         return http.
                 authorizeHttpRequests(auth -> auth
                         .requestMatchers("/home").permitAll()
-                        .requestMatchers("/cadastrar").permitAll()
+                        .requestMatchers("/cadastrar/**").permitAll()
                         .requestMatchers("/receita/informacoes/**").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated()
