@@ -117,11 +117,6 @@ public class UsuarioService implements UserDetailsService {
         return new UsuarioDTO().toDTO(usuario);
     }
 
-    public UsuarioDTO buscarPorEmail(String email) {
-        Usuario usuario = usuarioRepositoy.findByEmail(email);
-        return new UsuarioDTO().toDTO(usuario);
-    }
-
     public void alterarDados(AlterarDadosDTO dto, String email) {
         if (!dto.getEmail().equals(email)) {
             if (Objects.nonNull(usuarioRepositoy.findByEmail(dto.getEmail()))) {
@@ -164,6 +159,9 @@ public class UsuarioService implements UserDetailsService {
         if (!encoder.matches(dto.getSenha(), usuarioLogado.getSenha()) && !result.hasFieldErrors("senha")) {
             result.addError(new FieldError("dto", "senha", "Senha atual incorreta"));
         }
+        if (dto.getNovaSenha().length() < 6 && !result.hasFieldErrors("confirmarSenha")) {
+            result.addError(new FieldError("dto", "confirmarSenha", "Senha tem que ter no minimo 6 caracteres"));
+        }
         if (!dto.getNovaSenha().equals(dto.getConfirmarSenha()) && !result.hasFieldErrors("confirmarSenha")) {
             result.addError(new FieldError("dto", "confirmarSenha", "As novas senhas não conferem"));
         }
@@ -196,5 +194,19 @@ public class UsuarioService implements UserDetailsService {
         Usuario usuario = setDadosUsuarios(dto);
         usuario.setRole("ADMIN");
         usuarioRepositoy.save(usuario);
+    }
+
+    public AlterarDadosDTO buscarDadosAlterar(String email) {
+        Usuario usuario = usuarioRepositoy.findByEmail(email);
+        AlterarDadosDTO dto = new AlterarDadosDTO();
+        dto.setNome(usuario.getNome());
+        dto.setSobrenome(usuario.getSobrenome());
+        dto.setEmail(usuario.getEmail());
+        dto.setCpf(usuario.getCpf());
+        dto.setDataNascimento(usuario.getDataNascimento().format(formatter));
+        dto.setEstado(usuario.getEstado());
+        dto.setCidade(usuario.getCidade());
+        dto.setEndereco(usuario.getEndereco());
+        return dto;
     }
 }

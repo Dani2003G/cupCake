@@ -63,7 +63,7 @@ public class UsuarioController {
     @GetMapping("/receita/desfavoritar/{id}")
     public ModelAndView desfavoritar(@PathVariable Long id, Principal principal) {
         favoritoService.desfavoritar(id, principal.getName());
-        return new ModelAndView("/usuario/favoritos");
+        return new ModelAndView("redirect:/usuario/favoritos");
     }
 
     @GetMapping("/deletarConta")
@@ -77,8 +77,8 @@ public class UsuarioController {
     @GetMapping("/alterarDados")
     public ModelAndView alterarDados(AlterarDadosDTO dto, Principal principal) {
         ModelAndView mv = new ModelAndView("/usuario/alterarDados");
-        UsuarioDTO usuarioDTO = usuarioService.buscarPorEmail(principal.getName());
-        mv.addObject("usuarioDTO", usuarioDTO);
+        dto = usuarioService.buscarDadosAlterar(principal.getName());
+        mv.addObject("alterarDadosDTO", dto);
         return mv;
     }
 
