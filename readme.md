@@ -56,4 +56,4 @@ id_usuario BIGINT NOT NULL,
 PRIMARY KEY (id_cup_cake, id_usuario)
 );
 
-## Após é só iniciar o projeto através de qualquer IDE
+## Após é só iniciar o projeto através de qualquer IDE, que ele rodará na porta 8080
