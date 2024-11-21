@@ -11,47 +11,47 @@
         <form th:object="${usuarioDTO}" th:action="@{/cadastrar}" method="POST" class="card-body">
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input th:field="*{nome}" class="form-control" placeholder="Nome"/>
+                <input th:field="*{nome}" class="form-control" placeholder="Nome" required/>
             </div>
 
             <div class="form-group">
                 <label for="sobrenome">Sobrenome</label>
-                <input th:field="*{sobrenome}" class="form-control" placeholder="Sobrenome"/>
+                <input th:field="*{sobrenome}" class="form-control" placeholder="Sobrenome" required/>
             </div>
 
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input th:field="*{email}" class="form-control" placeholder="E-mail"/>
+                <input th:field="*{email}" type="email" class="form-control" placeholder="E-mail" required/>
             </div>
 
             <div class="form-group">
                 <label for="cpf">CPF</label>
-                <input th:field="*{cpf}" class="form-control" placeholder="cpf"/>
+                <input th:field="*{cpf}" class="form-control" placeholder="cpf" required/>
             </div>
 
             <div class="form-group">
                 <label for="senha">Senha</label>
-                <input type="password" th:field="*{senha}" class="form-control" placeholder="Senha"/>
+                <input type="password" th:field="*{senha}" class="form-control" placeholder="Senha" required/>
             </div>
 
             <div class="form-group">
                 <label for="dataNascimento">Data de Nascimento</label>
-                <input th:field="*{dataNascimento}" class="form-control" placeholder="Data de Nascimento"/>
+                <input th:field="*{dataNascimento}" class="form-control" placeholder="Data de Nascimento" required/>
             </div>
 
             <div class="form-group">
                 <label for="estado">Estado</label>
-                <input th:field="*{estado}" class="form-control" placeholder="Estado"/>
+                <input th:field="*{estado}" class="form-control" placeholder="Estado" required/>
             </div>
 
             <div class="form-group">
                 <label for="cidade">Cidade</label>
-                <input th:field="*{cidade}" class="form-control" placeholder="Cidade"/>
+                <input th:field="*{cidade}" class="form-control" placeholder="Cidade" required/>
             </div>
 
             <div class="form-group">
                 <label for="endereco">Endereço</label>
-                <input th:field="*{endereco}" class="form-control" placeholder="Endereço"/>
+                <input th:field="*{endereco}" class="form-control" placeholder="Endereço" required/>
             </div>
 
             <button class="btn btn-primary" type="submit">Cadastrar</button>
