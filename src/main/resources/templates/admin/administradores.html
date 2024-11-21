@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="~{base :: head}"></head>
+<body>
+<div th:replace="~{base :: logo}"></div>
+
+<div class="container">
+    <div th:replace="~{base :: navAdmin(4)}"></div>
+    <div th:replace="~{base :: titulo('Administradores')}"></div>
+    <div class="row row-cols-1 row-cols-md-3 mt-5">
+        <div class="col mb-4" th:each="usuario : ${usuarios}">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"></h5>
+                    <p th:text="${usuario.email}"></p>
+                    <br>
+                    <a th:href="@{/admin/verUsuario/{id}(id=${usuario.id})}" class="btn btn-success mr-3">Ver Usuario</a>
+                    <a th:href="@{/admin/deletarAdm/{id}(id=${usuario.id})}" class="btn btn-danger">Deletar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
