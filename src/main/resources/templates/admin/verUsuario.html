@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head th:replace="~{base :: head}"></head>
+<body>
+<div th:replace="~{base :: logo}"></div>
+
+<div class="container">
+    <div class="card text-center mt-5">
+        <div class="card-header">
+            <h5 th:text="${usuario.nome} + ' ' + ${usuario.sobrenome}"></h5>
+        </div>
+        <div class="card-body">
+            <p>CPF: <span th:text="${usuario.cpf}"></span></p>
+            <p>Email: <span th:text="${usuario.email}"></span></p>
+            <p>Data Nascimento: <span th:text="${usuario.dataNascimento}"></span></p>
+            <p>Estado: <span th:text="${usuario.estado}"></span></p>
+            <p>Cidade: <span th:text="${usuario.cidade}"></span></p>
+            <p>Endereço: <span th:text="${usuario.endereco}"></span></p>
+        </div>
+        <div class="card-footer text-muted">
+            <h5>Data Cadastro: <span th:text="${usuario.dataCadastro}"></span> </h5>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
