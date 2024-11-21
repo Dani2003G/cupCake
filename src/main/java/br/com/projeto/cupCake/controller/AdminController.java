@@ -38,6 +38,13 @@ public class AdminController {
         return new ModelAndView("redirect:/admin");
     }
 
+    @GetMapping("/deletar/{id}")
+    public ModelAndView deletar(@PathVariable Long id) {
+        cupCakeService.deletar(id);
+        return new ModelAndView("redirect:/admin");
+
+    }
+
     @GetMapping("/receitas")
     public ModelAndView receitas() {
         ModelAndView mv = new ModelAndView("admin/receitas");
