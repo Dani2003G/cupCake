@@ -10,32 +10,40 @@
         <form th:object="${cupCakeDTO}" th:action="@{/receita/novo}" class="card-body" method="post">
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input name="nome" class="form-control" placeholder="Nome"/>
+                <input name="nome" th:field="*{nome}" th:errorclass="is-invalid" class="form-control" placeholder="Nome"/>
+                <div class="invalid-feedback" th:errors="*{nome}"></div>
             </div>
 
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                <input name="descricao" class="form-control" placeholder="Descrição"/>
+                <input name="descricao" th:field="*{descricao}" th:errorclass="is-invalid" class="form-control" placeholder="Descrição"/>
+                <div class="invalid-feedback" th:errors="*{descricao}"></div>
             </div>
 
             <div class="form-group">
                 <label for="tempoPreparo">Tempo de Preparo em minutos</label>
-                <input name="tempoPreparo" class="form-control" placeholder="Tempo de Preparo"/>
+                <input name="tempoPreparo" th:field="*{tempoPreparo}" th:errorclass="is-invalid" class="form-control"
+                       placeholder="Tempo de Preparo"/>
+                <div class="invalid-feedback" th:errors="*{tempoPreparo}"></div>
             </div>
 
             <div class="form-group">
                 <label for="igredientes">Igredientes</label>
-                <textarea name="igredientes" class="form-control" placeholder="Igredientes"></textarea>
+                <textarea name="igredientes"  th:field="*{igredientes}" th:errorclass="is-invalid" class="form-control"
+                          placeholder="Igredientes"></textarea>
+                <div class="invalid-feedback" th:errors="*{igredientes}"></div>
             </div>
 
             <div class="form-group">
                 <label for="modoPreparo">Modo de Preparo</label>
-                <textarea name="modoPreparo" class="form-control" placeholder="Modo de preparo"></textarea>
+                <textarea name="modoPreparo" th:field="*{modoPreparo}" th:errorclass="is-invalid" class="form-control" placeholder="Modo de preparo"></textarea>
+                <div class="invalid-feedback" th:errors="*{modoPreparo}"></div>
             </div>
 
             <div class="form-group">
                 <label for="urlImagem">Url Imagem</label>
-                <input name="url"  class="form-control" placeholder="Url Imagem"/>
+                <input name="url" th:field="*{urlImagem}" th:errorclass="is-invalid" class="form-control" placeholder="Url Imagem"/>
+                <div class="invalid-feedback" th:errors="*{urlImagem}"></div>
             </div>
 
             <button class="btn btn-primary" type="submit">Adicionar</button>
