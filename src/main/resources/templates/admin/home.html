@@ -5,6 +5,7 @@
 <div th:replace="~{base :: logo}"></div>
 
 <div class="container">
+    <div th:replace="~{base :: navAdmin(1)}"></div>
     <div th:replace="~{base :: titulo('Receitas para Aprovar')}"></div>
     <div class="row row-cols-1 row-cols-md-3 mt-5">
         <div class="col mb-4" th:each="cupCake : ${cupCakes}">
@@ -13,8 +14,9 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${cupCake.nome}"></h5>
                     <a th:href="@{/receita/informacoes/{id}(id=${cupCake.id})}" class="card-text" th:text="${cupCake.descricao}"></a>
-                    <a th:href="@{/admin/aprovar/{id}(id=${cupCake.id})}" class="btn btn-success">Aprovar</a>
-                    <a th:href="@{/admin/deletar/{id}(id=${cupCake.id})}" class="btn btn-danger">Deletar</a>
+                    <br>
+                    <a th:href="@{/admin/aprovar/{id}(id=${cupCake.id})}" class="btn btn-success mt-3">Aprovar</a>
+                    <a th:href="@{/admin/deletar/{id}(id=${cupCake.id})}" class="btn btn-danger mt-3">Deletar</a>
                 </div>
             </div>
         </div>
