@@ -1,16 +1,15 @@
 package br.com.projeto.cupCake.controller;
 
+import br.com.projeto.cupCake.dto.CadastroUsuarioDTO;
 import br.com.projeto.cupCake.dto.CupCakeDTO;
 import br.com.projeto.cupCake.dto.UsuarioDTO;
-import br.com.projeto.cupCake.model.CupCake;
 import br.com.projeto.cupCake.service.CupCakeService;
 import br.com.projeto.cupCake.service.UsuarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -62,17 +61,19 @@ public class AdminController {
     }
 
     @GetMapping("/administradores")
-    public ModelAndView administradores() {
+    public ModelAndView administradores(@RequestParam(required = false) String mensagemErro) {
         ModelAndView mv = new ModelAndView("admin/administradores");
         List<UsuarioDTO> usuarios = usuarioService.buscarUsuariosAdministradores();
         mv.addObject("usuarios", usuarios);
+        mv.addObject("mensagemErro", mensagemErro);
         return mv;
     }
 
     @GetMapping("/deletarAdm/{id}")
     public ModelAndView deletarAdm(@PathVariable Long id, Principal principal) {
-        usuarioService.validarDelecaoAdm(id, principal.getName());
-        return new ModelAndView("redirect:/admin/administradores");
+        ModelAndView mv = new ModelAndView("redirect:/admin/administradores");
+        usuarioService.validarDelecaoAdm(id, principal.getName(), mv);
+        return mv;
     }
 
     @GetMapping("/verUsuario/{id}")
@@ -81,5 +82,21 @@ public class AdminController {
         UsuarioDTO usuarioDTO = usuarioService.buscarPorId(id);
         mv.addObject("usuario", usuarioDTO);
         return mv;
+    }
+
+    @GetMapping("/adicionarNovoAdmin")
+    public ModelAndView adicionarNovoAdmin(CadastroUsuarioDTO dto) {
+        return new ModelAndView("admin/adicionarNovoAdmin");
+    }
+
+    @PostMapping("/adicionarNovoAdmin")
+    public ModelAndView adicionarNovoAdmin(@Valid CadastroUsuarioDTO dto, BindingResult result) {
+        usuarioService.validarCadastro(dto, result);
+
+        if(result.hasErrors()) {
+            return new ModelAndView("admin/adicionarNovoAdmin");
+        }
+        usuarioService.salvarAdmin(dto);
+        return new ModelAndView("redirect:/admin/administradores");
     }
 }

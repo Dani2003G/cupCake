@@ -1,5 +1,6 @@
 package br.com.projeto.cupCake.service;
 
+import br.com.projeto.cupCake.dto.AlterarDadosDTO;
 import br.com.projeto.cupCake.dto.AlterarSenhaDTO;
 import br.com.projeto.cupCake.dto.CadastroUsuarioDTO;
 import br.com.projeto.cupCake.dto.UsuarioDTO;
@@ -21,6 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -52,6 +54,12 @@ public class UsuarioService implements UserDetailsService {
     }
 
     public void salvar(CadastroUsuarioDTO dto) {
+        Usuario usuario = setDadosUsuarios(dto);
+        usuario.setRole("USER");
+        usuarioRepositoy.save(usuario);
+    }
+
+    private static Usuario setDadosUsuarios(CadastroUsuarioDTO dto) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Usuario usuario = new Usuario();
         usuario.setNome(dto.getNome());
@@ -63,9 +71,8 @@ public class UsuarioService implements UserDetailsService {
         usuario.setEstado(dto.getEstado());
         usuario.setCidade(dto.getCidade());
         usuario.setEndereco(dto.getEndereco());
-        usuario.setRole("USER");
         usuario.setDataCadastro(LocalDateTime.now());
-        usuarioRepositoy.save(usuario);
+        return usuario;
     }
 
     public void deletarUsuario(String email) {
@@ -90,15 +97,17 @@ public class UsuarioService implements UserDetailsService {
         return usuarios.stream().map(new UsuarioDTO()::toDTO).toList();
     }
 
-    public void validarDelecaoAdm(Long id, String email) {
+    public void validarDelecaoAdm(Long id, String email, ModelAndView mv) {
         List<Usuario> usuarios = usuarioRepositoy.buscarUsuariosAdministradores();
         if (usuarios.size() == 1) {
-            throw new ServiceException("Tem que ter ao menos 1 administrador cadastrado");
+            mv.addObject("mensagemErro", "Tem que ter ao menos 1 administrador cadastrado");
+            return;
         }
         Usuario usuario1 = usuarioRepositoy.findById(id).get();
         Usuario usuario2 = usuarioRepositoy.findByEmail(email);
         if (usuario1.getId().equals(usuario2.getId())) {
-            throw new ServiceException("Administrador a ser deletado é o logado");
+            mv.addObject("mensagemErro", "Administrador logado não pode deletar ele mesmo");
+            return;
         }
         usuarioRepositoy.delete(usuario1);
     }
@@ -113,7 +122,7 @@ public class UsuarioService implements UserDetailsService {
         return new UsuarioDTO().toDTO(usuario);
     }
 
-    public void alterarDados(UsuarioDTO dto, String email) {
+    public void alterarDados(AlterarDadosDTO dto, String email) {
         if (!dto.getEmail().equals(email)) {
             if (Objects.nonNull(usuarioRepositoy.findByEmail(dto.getEmail()))) {
                 throw new ServiceException("E-mail já está sendo usado");
@@ -158,7 +167,7 @@ public class UsuarioService implements UserDetailsService {
         if (!dto.getNovaSenha().equals(dto.getConfirmarSenha()) && !result.hasFieldErrors("confirmarSenha")) {
             result.addError(new FieldError("dto", "confirmarSenha", "As novas senhas não conferem"));
         }
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return;
         }
         usuarioLogado.setSenha(encoder.encode(dto.getNovaSenha()));
@@ -166,7 +175,7 @@ public class UsuarioService implements UserDetailsService {
     }
 
     public void validarCadastro(@Valid CadastroUsuarioDTO dto, BindingResult result) {
-        if(dto.getSenha().length() < 6 && !result.hasFieldErrors("senha")) {
+        if (dto.getSenha().length() < 6 && !result.hasFieldErrors("senha")) {
             result.addError(new FieldError("dto", "senha", "Senha tem que ter no minimo 6 caracteres"));
         }
 
@@ -181,5 +190,11 @@ public class UsuarioService implements UserDetailsService {
         if (Objects.nonNull(usuarioRepositoy.findByCpf(dto.getCpf())) && !result.hasFieldErrors("cpf")) {
             result.addError(new FieldError("dto", "cpf", "CPF já está sendo usado"));
         }
+    }
+
+    public void salvarAdmin(CadastroUsuarioDTO dto) {
+        Usuario usuario = setDadosUsuarios(dto);
+        usuario.setRole("ADMIN");
+        usuarioRepositoy.save(usuario);
     }
 }
