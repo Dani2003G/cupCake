@@ -8,45 +8,53 @@
     <div th:replace="~{base :: titulo('Alterar Dados')}"></div>
 
     <div class="card mt-5">
-        <form th:object="${usuarioDTO}" th:action="@{/usuario/alterarDados}" method="POST" class="card-body">
+        <form th:object="${alterarDadosDTO}" th:action="@{/usuario/alterarDados}" method="POST" class="card-body">
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input th:field="*{nome}" class="form-control" placeholder="Nome" required/>
+                <input th:field="*{nome}" th:errorclass="is-invalid" class="form-control" placeholder="Nome" />
+                <div class="invalid-feedback" th:errors="*{nome}"></div>
             </div>
 
             <div class="form-group">
                 <label for="sobrenome">Sobrenome</label>
-                <input th:field="*{sobrenome}" class="form-control" placeholder="Sobrenome" required/>
+                <input th:field="*{sobrenome}" th:errorclass="is-invalid" class="form-control" placeholder="Sobrenome" />
+                <div class="invalid-feedback" th:errors="*{sobrenome}"></div>
             </div>
 
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input th:field="*{email}" type="email" class="form-control" placeholder="E-mail" required/>
+                <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control" placeholder="E-mail" />
+                <div class="invalid-feedback" th:errors="*{email}"></div>
             </div>
 
             <div class="form-group">
                 <label for="cpf">CPF</label>
-                <input th:field="*{cpf}" class="form-control" placeholder="cpf" required/>
+                <input th:field="*{cpf}"  th:errorclass="is-invalid" class="form-control" placeholder="cpf" />
+                <div class="invalid-feedback" th:errors="*{cpf}"></div>
             </div>
 
             <div class="form-group">
                 <label for="dataNascimento">Data de Nascimento</label>
-                <input th:field="*{dataNascimento}" class="form-control" placeholder="Data de Nascimento" required/>
+                <input th:field="*{dataNascimento}"  th:errorclass="is-invalid" class="form-control" placeholder="Data de Nascimento" />
+                <div class="invalid-feedback" th:errors="*{dataNascimento}"></div>
             </div>
 
             <div class="form-group">
                 <label for="estado">Estado</label>
-                <input th:field="*{estado}" class="form-control" placeholder="Estado" required/>
+                <input th:field="*{estado}" th:errorclass="is-invalid" class="form-control" placeholder="Estado" />
+                <div class="invalid-feedback" th:errors="*{estado}"></div>
             </div>
 
             <div class="form-group">
                 <label for="cidade">Cidade</label>
-                <input th:field="*{cidade}" class="form-control" placeholder="Cidade" required/>
+                <input th:field="*{cidade}" th:errorclass="is-invalid" class="form-control" placeholder="Cidade" />
+                <div class="invalid-feedback" th:errors="*{cidade}"></div>
             </div>
 
             <div class="form-group">
                 <label for="endereco">Endereço</label>
-                <input th:field="*{endereco}" class="form-control" placeholder="Endereço" required/>
+                <input th:field="*{endereco}" th:errorclass="is-invalid" class="form-control" placeholder="Endereço" />
+                <div class="invalid-feedback" th:errors="*{endereco}"></div>
             </div>
 
             <button class="btn btn-primary mr-3" type="submit">Alterar Dados</button>
