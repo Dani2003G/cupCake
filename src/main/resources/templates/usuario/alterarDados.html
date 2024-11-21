@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{base :: head}"></head>
+<body>
+<div th:replace="~{base :: logo}"></div>
+
+<div class="container">
+    <div th:replace="~{base :: titulo('Alterar Dados')}"></div>
+
+    <div class="card mt-5">
+        <form th:object="${usuarioDTO}" th:action="@{/usuario/alterarDados}" method="POST" class="card-body">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input th:field="*{nome}" class="form-control" placeholder="Nome" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="sobrenome">Sobrenome</label>
+                <input th:field="*{sobrenome}" class="form-control" placeholder="Sobrenome" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input th:field="*{email}" type="email" class="form-control" placeholder="E-mail" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input th:field="*{cpf}" class="form-control" placeholder="cpf" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input th:field="*{dataNascimento}" class="form-control" placeholder="Data de Nascimento" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <input th:field="*{estado}" class="form-control" placeholder="Estado" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="cidade">Cidade</label>
+                <input th:field="*{cidade}" class="form-control" placeholder="Cidade" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="endereco">Endereço</label>
+                <input th:field="*{endereco}" class="form-control" placeholder="Endereço" required/>
+            </div>
+
+            <button class="btn btn-primary mr-3" type="submit">Alterar Dados</button>
+            <a class="btn btn-secondary" href="/usuario/alterarSenha">Alterar Senha</a>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

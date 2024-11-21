@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{base :: head}"></head>
+<body>
+<div th:replace="~{base :: logo}"></div>
+
+<div class="container">
+  <div th:replace="~{base :: titulo('Alterar Senha')}"></div>
+
+  <div class="card mt-5">
+    <form th:object="${usuarioDTO}" th:action="@{/usuario/alterarSenha}" method="POST" class="card-body">
+
+      <div class="form-group">
+        <label for="senha">Senha Atual</label>
+        <input class="form-control" name="senha" type="password" placeholder="Senha Atual" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="novaSenha">Nova Senha</label>
+        <input class="form-control" name="novaSenha" type="password" placeholder="Nova Atual" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmarSenha">Confirmar Senha</label>
+        <input class="form-control" name="confirmarSenha" type="password" placeholder="Confirmar Senha" required/>
+      </div>
+
+      <button class="btn btn-secondary" type="submit">Alterar Senha</button>
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>
