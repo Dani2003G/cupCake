@@ -5,29 +5,35 @@
 <div th:replace="~{base :: logo}"></div>
 
 <div class="container">
-  <div th:replace="~{base :: titulo('Alterar Senha')}"></div>
+    <div th:replace="~{base :: titulo('Alterar Senha')}"></div>
 
-  <div class="card mt-5">
-    <form th:object="${usuarioDTO}" th:action="@{/usuario/alterarSenha}" method="POST" class="card-body">
+    <div class="card mt-5">
+        <form th:object="${alterarSenhaDTO}" th:action="@{/usuario/alterarSenha}" method="POST" class="card-body">
 
-      <div class="form-group">
-        <label for="senha">Senha Atual</label>
-        <input class="form-control" name="senha" type="password" placeholder="Senha Atual" required/>
-      </div>
+            <div class="form-group">
+                <label for="senha">Senha Atual</label>
+                <input class="form-control" th:errorclass="is-invalid" name="senha" type="password"
+                       placeholder="Senha Atual"/>
+                <div class="invalid-feedback" th:errors="*{senha}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="novaSenha">Nova Senha</label>
-        <input class="form-control" name="novaSenha" type="password" placeholder="Nova Atual" required/>
-      </div>
+            <div class="form-group">
+                <label for="novaSenha">Nova Senha</label>
+                <input class="form-control" th:errorclass="is-invalid" name="novaSenha" type="password"
+                       placeholder="Nova Atual"/>
+                <div class="invalid-feedback" th:errors="*{novaSenha}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="confirmarSenha">Confirmar Senha</label>
-        <input class="form-control" name="confirmarSenha" type="password" placeholder="Confirmar Senha" required/>
-      </div>
+            <div class="form-group">
+                <label for="confirmarSenha">Confirmar Senha</label>
+                <input class="form-control" th:errorclass="is-invalid" name="confirmarSenha" type="password"
+                       placeholder="Confirmar Senha"/>
+                <div class="invalid-feedback" th:errors="*{confirmarSenha}"></div>
+            </div>
 
-      <button class="btn btn-secondary" type="submit">Alterar Senha</button>
-    </form>
-  </div>
+            <button class="btn btn-secondary" type="submit">Alterar Senha</button>
+        </form>
+    </div>
 
 </div>
 
