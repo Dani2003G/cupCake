@@ -41,7 +41,7 @@ public class AdminController {
     @GetMapping("/receitas")
     public ModelAndView receitas() {
         ModelAndView mv = new ModelAndView("admin/receitas");
-        List<CupCakeDTO> cupCakes = cupCakeService.buscarReceitasNaoAprovadas();
+        List<CupCakeDTO> cupCakes = cupCakeService.buscarTodasAprovadas();
         mv.addObject("cupCakes", cupCakes);
         return mv;
     }
