@@ -36,7 +36,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/adicionarReceita")
-    public ModelAndView cadastrarReceita() {
+    public ModelAndView cadastrarReceita(CupCakeDTO cupCakeDTO) {
         return new ModelAndView("/usuario/adicionarReceita");
     }
 
