@@ -1,5 +1,6 @@
 package br.com.projeto.cupCake.service;
 
+import br.com.projeto.cupCake.dto.AlterarSenhaDTO;
 import br.com.projeto.cupCake.dto.CadastroUsuarioDTO;
 import br.com.projeto.cupCake.dto.UsuarioDTO;
 import br.com.projeto.cupCake.model.Usuario;
@@ -148,14 +149,17 @@ public class UsuarioService implements UserDetailsService {
         SecurityContextHolder.getContext().setAuthentication(novaAutenticacao);
     }
 
-    public void alterarSenha(UsuarioDTO dto, String email) {
+    public void alterarSenha(@Valid AlterarSenhaDTO dto, String email, BindingResult result) {
         Usuario usuarioLogado = usuarioRepositoy.findByEmail(email);
         PasswordEncoder encoder = new BCryptPasswordEncoder();
-        if (!encoder.matches(dto.getSenha(), usuarioLogado.getSenha())) {
-            throw new ServiceException("Senha atual incorreta");
+        if (!encoder.matches(dto.getSenha(), usuarioLogado.getSenha()) && !result.hasFieldErrors("senha")) {
+            result.addError(new FieldError("dto", "senha", "Senha atual incorreta"));
         }
-        if (!dto.getNovaSenha().equals(dto.getConfirmarSenha())) {
-            throw new ServiceException("As novas senhas não conferem");
+        if (!dto.getNovaSenha().equals(dto.getConfirmarSenha()) && !result.hasFieldErrors("confirmarSenha")) {
+            result.addError(new FieldError("dto", "confirmarSenha", "As novas senhas não conferem"));
+        }
+        if(result.hasErrors()) {
+            return;
         }
         usuarioLogado.setSenha(encoder.encode(dto.getNovaSenha()));
         usuarioRepositoy.save(usuarioLogado);
