@@ -81,7 +81,7 @@ public class UsuarioController {
     @PostMapping("/alterarDados")
     public ModelAndView alterarDados(UsuarioDTO dto, Principal principal) {
         usuarioService.alterarDados(dto, principal.getName());
-        return new ModelAndView("redirect:/usuario/perfil");
+        return new ModelAndView("redirect:/usuario");
     }
 
     @GetMapping("/alterarSenha")
