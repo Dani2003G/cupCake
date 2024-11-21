@@ -1,5 +1,6 @@
 package br.com.projeto.cupCake.controller;
 
+import br.com.projeto.cupCake.dto.AlterarDadosDTO;
 import br.com.projeto.cupCake.dto.AlterarSenhaDTO;
 import br.com.projeto.cupCake.dto.CupCakeDTO;
 import br.com.projeto.cupCake.dto.UsuarioDTO;
@@ -82,7 +83,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/alterarDados")
-    public ModelAndView alterarDados(UsuarioDTO dto, Principal principal) {
+    public ModelAndView alterarDados(AlterarDadosDTO dto, Principal principal) {
         usuarioService.alterarDados(dto, principal.getName());
         return new ModelAndView("redirect:/usuario");
     }
