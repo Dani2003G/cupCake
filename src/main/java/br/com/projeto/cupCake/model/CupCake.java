@@ -21,8 +21,10 @@ public class CupCake {
 
     private Integer tempoPreparo;
 
+    @Column(length = 500)
     private String igredientes;
 
+    @Column(length = 1000)
     private String modoPreparo;
 
     private String urlImagem;
