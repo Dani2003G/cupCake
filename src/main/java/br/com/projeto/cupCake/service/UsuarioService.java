@@ -3,8 +3,12 @@ package br.com.projeto.cupCake.service;
 import br.com.projeto.cupCake.dto.UsuarioDTO;
 import br.com.projeto.cupCake.model.Usuario;
 import br.com.projeto.cupCake.repository.UsuarioRepositoy;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.service.spi.ServiceException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UsuarioService implements UserDetailsService{
 
@@ -124,6 +129,19 @@ public class UsuarioService implements UserDetailsService{
         usuarioLogado.setCidade(dto.getCidade());
         usuarioLogado.setEndereco(dto.getEndereco());
         usuarioRepositoy.save(usuarioLogado);
+        atualizarContextoDeSeguranca(usuarioLogado.getEmail());
+    }
+
+    private void atualizarContextoDeSeguranca(String email) {
+        Authentication atual = SecurityContextHolder.getContext().getAuthentication();
+
+        Authentication novaAutenticacao = new UsernamePasswordAuthenticationToken(
+                email,
+                atual.getCredentials(),
+                atual.getAuthorities()
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(novaAutenticacao);
     }
 
     public void alterarSenha(UsuarioDTO dto, String email) {
