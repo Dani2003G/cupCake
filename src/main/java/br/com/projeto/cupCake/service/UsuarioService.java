@@ -117,18 +117,22 @@ public class UsuarioService implements UserDetailsService {
         return new UsuarioDTO().toDTO(usuario);
     }
 
-    public void alterarDados(AlterarDadosDTO dto, String email) {
+    public void alterarDados(AlterarDadosDTO dto, String email, BindingResult result) {
         if (!dto.getEmail().equals(email)) {
             if (Objects.nonNull(usuarioRepositoy.findByEmail(dto.getEmail()))) {
-                throw new ServiceException("E-mail já está sendo usado");
+                result.addError(new FieldError("dto", "email", "E-mail já está sendo usado"));
             }
         }
         Usuario usuarioLogado = usuarioRepositoy.findByEmail(email);
         if (!dto.getCpf().equals(usuarioLogado.getCpf())) {
             if (Objects.nonNull(usuarioRepositoy.findByCpf(dto.getCpf()))) {
-                throw new ServiceException("CPF já está sendo usado");
+                result.addError(new FieldError("dto", "cpf", "CPF já está sendo usado"));
             }
         }
+        if(result.hasErrors()) {
+            return;
+        }
+
         usuarioLogado.setNome(dto.getNome());
         usuarioLogado.setSobrenome(dto.getSobrenome());
         usuarioLogado.setEmail(dto.getEmail());

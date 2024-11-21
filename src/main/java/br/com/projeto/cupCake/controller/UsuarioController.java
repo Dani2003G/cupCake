@@ -84,10 +84,10 @@ public class UsuarioController {
 
     @PostMapping("/alterarDados")
     public ModelAndView alterarDados(@Valid AlterarDadosDTO dto, BindingResult result, Principal principal) {
+        usuarioService.alterarDados(dto, principal.getName(), result);
         if (result.hasErrors()) {
             return new ModelAndView("/usuario/alterarDados");
         }
-        usuarioService.alterarDados(dto, principal.getName());
         return new ModelAndView("redirect:/usuario");
     }
 
