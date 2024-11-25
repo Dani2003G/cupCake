@@ -7,74 +7,76 @@
 
 <div class="container">
 
-  <div class="card mt-5">
-    <form th:object="${cadastroUsuarioDTO}" th:action="@{/admin/adicionarNovoAdmin}" method="POST" class="card-body">
-      <div class="form-group">
-        <label for="nome">Nome</label>
-        <input th:field="*{nome}" th:errorclass="is-invalid" class="form-control" placeholder="Nome" />
-        <div class="invalid-feedback" th:errors="*{nome}"></div>
-      </div>
+    <div class="card mt-5">
+        <form th:object="${cadastroUsuarioDTO}" th:action="@{/admin/adicionarNovoAdmin}" method="POST"
+              class="card-body">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input th:field="*{nome}" th:errorclass="is-invalid" class="form-control" placeholder="Nome"/>
+                <div class="invalid-feedback" th:errors="*{nome}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="sobrenome">Sobrenome</label>
-        <input th:field="*{sobrenome}" th:errorclass="is-invalid" class="form-control" placeholder="Sobrenome" />
-        <div class="invalid-feedback" th:errors="*{sobrenome}"></div>
-      </div>
+            <div class="form-group">
+                <label for="sobrenome">Sobrenome</label>
+                <input th:field="*{sobrenome}" th:errorclass="is-invalid" class="form-control" placeholder="Sobrenome"/>
+                <div class="invalid-feedback" th:errors="*{sobrenome}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="email">E-mail</label>
-        <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control"
-               placeholder="E-mail" />
-        <div class="invalid-feedback" th:errors="*{email}"></div>
-      </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input th:field="*{email}" th:errorclass="is-invalid" type="email" class="form-control"
+                       placeholder="E-mail"/>
+                <div class="invalid-feedback" th:errors="*{email}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="cpf">CPF</label>
-        <input th:field="*{cpf}" th:errorclass="is-invalid" class="form-control" placeholder="cpf" />
-        <div class="invalid-feedback" th:errors="*{cpf}"></div>
-      </div>
+            <div class="form-group">
+                <label for="cpf">CPF</label>
+                <input th:field="*{cpf}" th:errorclass="is-invalid" class="form-control" placeholder="CPF"/>
+                <div class="invalid-feedback" th:errors="*{cpf}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="senha">Senha</label>
-        <input type="password" th:field="*{senha}" th:errorclass="is-invalid" class="form-control" placeholder="Senha" />
-        <div class="invalid-feedback" th:errors="*{senha}"></div>
-      </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" th:field="*{senha}" th:errorclass="is-invalid" class="form-control"
+                       placeholder="Senha"/>
+                <div class="invalid-feedback" th:errors="*{senha}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="confirmarSenha">Confirmar Senha</label>
-        <input type="password" th:errorclass="is-invalid" th:field="*{confirmarSenha}" class="form-control"
-               placeholder="Confirmar Senha" />
-        <div class="invalid-feedback" th:errors="*{confirmarSenha}"></div>
-      </div>
+            <div class="form-group">
+                <label for="confirmarSenha">Confirmar Senha</label>
+                <input type="password" th:errorclass="is-invalid" th:field="*{confirmarSenha}" class="form-control"
+                       placeholder="Confirmar Senha"/>
+                <div class="invalid-feedback" th:errors="*{confirmarSenha}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="dataNascimento">Data de Nascimento</label>
-        <input th:field="*{dataNascimento}" th:errorclass="is-invalid" class="form-control"
-               placeholder="Data de Nascimento" />
-        <div class="invalid-feedback" th:errors="*{dataNascimento}"></div>
-      </div>
+            <div class="form-group">
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input th:field="*{dataNascimento}" th:errorclass="is-invalid" class="form-control"
+                       placeholder="Data de Nascimento"/>
+                <div class="invalid-feedback" th:errors="*{dataNascimento}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="estado">Estado</label>
-        <input th:field="*{estado}" th:errorclass="is-invalid" class="form-control" placeholder="Estado" />
-        <div class="invalid-feedback" th:errors="*{estado}"></div>
-      </div>
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <input th:field="*{estado}" th:errorclass="is-invalid" class="form-control" placeholder="Estado"/>
+                <div class="invalid-feedback" th:errors="*{estado}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="cidade">Cidade</label>
-        <input th:field="*{cidade}"  th:errorclass="is-invalid" class="form-control" placeholder="Cidade" />
-        <div class="invalid-feedback" th:errors="*{cidade}"></div>
-      </div>
+            <div class="form-group">
+                <label for="cidade">Cidade</label>
+                <input th:field="*{cidade}" th:errorclass="is-invalid" class="form-control" placeholder="Cidade"/>
+                <div class="invalid-feedback" th:errors="*{cidade}"></div>
+            </div>
 
-      <div class="form-group">
-        <label for="endereco">Endereço</label>
-        <input th:field="*{endereco}" th:errorclass="is-invalid" class="form-control" placeholder="Endereço" />
-        <div class="invalid-feedback" th:errors="*{endereco}"></div>
-      </div>
+            <div class="form-group">
+                <label for="endereco">Endereço</label>
+                <input th:field="*{endereco}" th:errorclass="is-invalid" class="form-control" placeholder="Endereço"/>
+                <div class="invalid-feedback" th:errors="*{endereco}"></div>
+            </div>
 
-      <button class="btn btn-primary" type="submit">Cadastrar</button>
-    </form>
-  </div>
+            <button class="btn btn-primary" type="submit">Cadastrar</button>
+        </form>
+    </div>
 </div>
 
 </body>

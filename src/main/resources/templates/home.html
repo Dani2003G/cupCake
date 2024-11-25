@@ -7,13 +7,14 @@
 
 <div class="container">
     <div th:replace="~{base :: titulo('Receitas')}"></div>
-    <div class="row row-cols-1 row-cols-md-3 mt-5" >
+    <div class="row row-cols-1 row-cols-md-3 mt-5">
         <div class="col mb-4" th:each="cupCake : ${cupCakes}">
             <div class="card">
-                <img th:src="${cupCake.urlImagem}" class="card-img-top" height="200" width="200">
+                <a th:href="@{/receita/informacoes/{id}(id=${cupCake.id})}">
+                    <img th:src="${cupCake.urlImagem}" class="card-img-top" height="200" width="200">
+                </a>
                 <div class="card-body">
                     <h5 class="card-title" th:text="${cupCake.nome}"></h5>
-                    <a th:href="@{/receita/informacoes/{id}(id=${cupCake.id})}" class="card-text" th:text="${cupCake.descricao}"></a>
                 </div>
             </div>
         </div>

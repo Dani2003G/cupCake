@@ -25,9 +25,13 @@
             <p th:text="${cupCake.modoPreparo}"></p>
 
             <a th:if="${!isFavorito}" sec:authorize="isAuthenticated()"
-               th:href="@{/receita/favoritar/{id}(id=${cupCake.id})}" class="btn btn-danger">Favoritar</a>
+               th:href="@{/receita/favoritar/{id}(id=${cupCake.id})}" class="btn btn-danger">
+                <i class="fa-solid fa-heart"></i>
+            </a>
             <a th:if="${isFavorito}" sec:authorize="isAuthenticated()"
-               th:href="@{/receita/desfavoritar/{id}(id=${cupCake.id})}" class="btn btn-danger">Desfavoritar</a>
+               th:href="@{/receita/desfavoritar/{id}(id=${cupCake.id})}" class="btn btn-danger">
+                <i class="fa-solid fa-heart-crack"></i>
+            </a>
         </card>
     </div>
 </div>

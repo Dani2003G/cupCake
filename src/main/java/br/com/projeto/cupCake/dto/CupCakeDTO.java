@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
@@ -13,21 +14,27 @@ public class CupCakeDTO {
     private Long id;
 
     @NotBlank
+    @Length(min = 1, max = 30)
     private String nome;
 
     @NotBlank
+    @Length(min = 1,max = 255)
     private String descricao;
 
     @NotEmpty
+    @Length(min = 1, max = 5)
     private String tempoPreparo;
 
     @NotBlank
+    @Length(min = 1,max = 500)
     private String igredientes;
 
     @NotBlank
+    @Length(min = 1,max = 1000)
     private String modoPreparo;
 
     @NotBlank
+    @Length(min = 1,max = 255)
     private String urlImagem;
 
     public CupCakeDTO toDTO(CupCake cupCake) {

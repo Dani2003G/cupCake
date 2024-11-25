@@ -50,7 +50,7 @@
             <div class="form-group">
                 <label for="dataNascimento">Data de Nascimento</label>
                 <input th:field="*{dataNascimento}" th:errorclass="is-invalid" class="form-control"
-                       placeholder="Data de Nascimento" />
+                       placeholder="Data de Nascimento (dd/mm/yyyy)" maxlength="10"/>
                 <div class="invalid-feedback" th:errors="*{dataNascimento}"></div>
             </div>
 

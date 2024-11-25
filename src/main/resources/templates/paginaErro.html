@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{base :: head}"></head>
+<body>
+
+<div class="container">
+    <h1 class="mt-5">Ocorreu um erro</h1>
+    <p>Desculpe, algo deu errado. A página que você está procurando não foi encontrada ou houve um erro no servidor.</p>
+    <a href="/home" th:href="@{/home}" class="btn btn-primary">Voltar à página inicial</a>
+</div>
+
+<footer th:replace="~{base :: rodape}"></footer>
+
+</body>
+</html>

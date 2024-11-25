@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Objects;
 
@@ -129,6 +130,13 @@ public class UsuarioService implements UserDetailsService {
                 result.addError(new FieldError("dto", "cpf", "CPF já está sendo usado"));
             }
         }
+
+        try {
+            LocalDate.parse(dto.getDataNascimento(), formatter);
+        } catch (DateTimeParseException e) {
+            result.addError(new FieldError("dto", "dataNascimento", "Data inválida"));
+        }
+
         if(result.hasErrors()) {
             return;
         }
@@ -191,6 +199,11 @@ public class UsuarioService implements UserDetailsService {
 
         if (Objects.nonNull(usuarioRepositoy.findByCpf(dto.getCpf())) && !result.hasFieldErrors("cpf")) {
             result.addError(new FieldError("dto", "cpf", "CPF já está sendo usado"));
+        }
+        try {
+           LocalDate.parse(dto.getDataNascimento(), formatter);
+        } catch (DateTimeParseException e) {
+            result.addError(new FieldError("dto", "dataNascimento", "Data inválida"));
         }
     }
 

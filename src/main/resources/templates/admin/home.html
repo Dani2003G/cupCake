@@ -15,8 +15,12 @@
                     <h5 class="card-title" th:text="${cupCake.nome}"></h5>
                     <a th:href="@{/receita/informacoes/{id}(id=${cupCake.id})}" class="card-text" th:text="${cupCake.descricao}"></a>
                     <br>
-                    <a th:href="@{/admin/aprovar/{id}(id=${cupCake.id})}" class="btn btn-success mt-3">Aprovar</a>
-                    <a th:href="@{/admin/deletar/{id}(id=${cupCake.id})}" class="btn btn-danger mt-3">Deletar</a>
+                    <a th:href="@{/admin/aprovar/{id}(id=${cupCake.id})}" class="btn btn-success mt-3">
+                        <i class="fa-solid fa-check"></i>
+                    </a>
+                    <a th:href="@{/admin/deletar/{id}(id=${cupCake.id})}" class="btn btn-danger mt-3">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
                 </div>
             </div>
         </div>
